@@ -1,40 +1,100 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 
-export default function TabTwoScreen() {
+export default function InsightsScreen() {
     return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-            headerImage={
-                <IconSymbol
-                    size={310}
-                    color="#808080"
-                    name="chevron.left.forwardslash.chevron.right"
-                    style={styles.headerImage}
-                />
-            }>
-            <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Explore</ThemedText>
-            </ThemedView>
-        </ParallaxScrollView>
+        <ThemedView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContent}>
+                <ThemedText style={styles.title}>Mood Insights</ThemedText>
+                
+                {/* Average Mood */}
+                <View style={styles.averageMoodContainer}>
+                    <ThemedText style={styles.averageMoodValue}>4,2</ThemedText>
+                    <ThemedText style={styles.averageMoodLabel}>Average mood</ThemedText>
+                </View>
+                
+                {/* Recommendation */}
+                <ThemedText style={styles.sectionTitle}>Recommendations</ThemedText>
+                <View style={styles.recommendationsContainer}>
+                    <View style={styles.recommendationItem}>
+                        <ThemedText style={styles.recommendationText}>Maintain regular sleep schedule</ThemedText>
+                    </View>
+                    <View style={styles.recommendationItem}>
+                        <ThemedText style={styles.recommendationText}>Exercise regularly to boost your mood</ThemedText>
+                    </View>
+                    <View style={styles.recommendationItem}>
+                        <ThemedText style={styles.recommendationText}>Don't skip breakfast to avoid anxiety</ThemedText>
+                    </View>
+                </View>
+                
+                {/* Progress */}
+                <ThemedText style={styles.sectionTitle}>Progress</ThemedText>
+                <View style={styles.progressContainer}>
+                    <View style={styles.progressBar}>
+                        <View style={styles.progressFill}></View>
+                    </View>
+                </View>
+            </ScrollView>
+        </ThemedView>
     );
 }
 
 const styles = StyleSheet.create({
-    headerImage: {
-        color: '#808080',
-        bottom: -90,
-        left: -35,
-        position: 'absolute',
+    container: {
+        flex: 1,
     },
-    titleContainer: {
-        flexDirection: 'row',
-        gap: 8,
+    scrollContent: {
+        padding: 24,
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 24,
+        marginTop: 40,
+    },
+    averageMoodContainer: {
+        marginBottom: 32,
+    },
+    averageMoodValue: {
+        fontSize: 36,
+        fontWeight: 'bold',
+    },
+    averageMoodLabel: {
+        fontSize: 18,
+        color: '#666',
+    },
+    sectionTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 16,
+    },
+    recommendationsContainer: {
+        marginBottom: 32,
+        gap: 12,
+    },
+    recommendationItem: {
+        backgroundColor: 'rgba(0,0,0,0.03)',
+        borderRadius: 12,
+        padding: 16,
+    },
+    recommendationText: {
+        fontSize: 16,
+    },
+    progressContainer: {
+        marginBottom: 40,
+    },
+    progressBar: {
+        height: 10,
+        backgroundColor: '#e0e0e0',
+        borderRadius: 5,
+        overflow: 'hidden',
+    },
+    progressFill: {
+        width: '40%',
+        height: '100%',
+        backgroundColor: '#000',
+        borderRadius: 5,
     },
 });

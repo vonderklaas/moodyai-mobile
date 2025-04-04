@@ -1,43 +1,111 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, ScrollView, View, TouchableOpacity, TextInput } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
     return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-            headerImage={
-                <Image
-                    source={require('@/assets/images/partial-react-logo.png')}
-                    style={styles.reactLogo}
-                />
-            }>
-            <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Welcome!</ThemedText>
-                <HelloWave />
-            </ThemedView>
-        </ParallaxScrollView>
+        <ThemedView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContent}>
+                <ThemedText style={styles.headerTitle}>Moody AI</ThemedText>
+                
+                <ThemedText style={styles.instructionText}>
+                    Tap the emoji that best describes your mood
+                </ThemedText>
+                
+                <View style={styles.emojiRow}>
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#F47C7C' }]}>
+                        <ThemedText style={styles.emoji}>😠</ThemedText>
+                    </TouchableOpacity> 
+                    
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FDB777' }]}>
+                        <ThemedText style={styles.emoji}>🙁</ThemedText>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FFDF6B' }]}>
+                        <ThemedText style={styles.emoji}>🙂</ThemedText>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#ADE792' }]}>
+                        <ThemedText style={styles.emoji}>😊</ThemedText>
+                    </TouchableOpacity>
+                </View>
+                
+                <View style={styles.noteContainer}>
+                    <TextInput
+                        placeholder="Optional note"
+                        placeholderTextColor="#999"
+                        style={styles.noteInput}
+                    />
+                </View>
+                
+                <TouchableOpacity style={styles.logButton}>
+                    <ThemedText style={styles.logButtonText}>Log Mood</ThemedText>
+                </TouchableOpacity>
+            </ScrollView>
+        </ThemedView>
     );
 }
 
 const styles = StyleSheet.create({
-    titleContainer: {
-        flexDirection: 'row',
+    container: {
+        flex: 1,
+    },
+    scrollContent: {
+        padding: 32,
         alignItems: 'center',
-        gap: 8,
     },
-    stepContainer: {
-        gap: 8,
-        marginBottom: 8,
+    headerTitle: {
+        fontSize: 20,
+        fontWeight: '500',
+        marginBottom: 50,
+        marginTop: 20,
     },
-    reactLogo: {
-        height: 178,
-        width: 290,
-        bottom: 0,
-        left: 0,
-        position: 'absolute',
+    instructionText: {
+        fontSize: 26,
+        fontWeight: '700',
+        textAlign: 'center',
+        marginBottom: 40,
+        lineHeight: 36,
+    },
+    emojiRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 12,
+        marginBottom: 30,
+    },
+    emojiCircle: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    emoji: {
+        fontSize: 30,
+    },
+    noteContainer: {
+        width: '100%',
+        marginBottom: 40,
+    },
+    noteInput: {
+        backgroundColor: '#f0f0f0',
+        padding: 16,
+        borderRadius: 10,
+        width: '100%',
+        fontSize: 16,
+    },
+    logButton: {
+        padding: 16,
+        paddingHorizontal: 32,
+        borderRadius: 50,
+        backgroundColor: '#000',
+        alignItems: 'center',
+    },
+    logButtonText: {
+        fontSize: 16,
+        fontWeight: '700',
+        color: '#fff',
     },
 });
