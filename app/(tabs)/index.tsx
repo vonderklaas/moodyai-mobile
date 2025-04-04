@@ -1,6 +1,5 @@
-import { Image, StyleSheet, Platform, ScrollView, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, ScrollView, View, TouchableOpacity, TextInput } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
