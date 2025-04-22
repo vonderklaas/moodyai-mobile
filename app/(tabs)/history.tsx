@@ -16,11 +16,11 @@ interface MoodEntry {
 
 // Sample data - this would come from your storage in a real app
 const moodHistory: MoodEntry[] = [
-    { id: '1', date: new Date(2023, 3, 4), mood: 'happy', emoji: '😊', color: '#ADE792', note: 'Had a great day!' },
-    { id: '2', date: new Date(2023, 3, 3), mood: 'neutral', emoji: '🙂', color: '#FFDF6B', note: 'Regular day' },
-    { id: '3', date: new Date(2023, 3, 2), mood: 'sad', emoji: '🙁', color: '#FDB777', note: 'Feeling a bit down' },
-    { id: '4', date: new Date(2023, 3, 1), mood: 'angry', emoji: '😠', color: '#F47C7C', note: 'Frustrated with work' },
-    { id: '5', date: new Date(2023, 2, 28), mood: 'happy', emoji: '😊', color: '#ADE792', note: 'Weekend was great' },
+    { id: '1', date: new Date(2025, 3, 4), mood: 'happy', emoji: '😊', color: '#ADE792', note: 'Had a great day!' },
+    { id: '2', date: new Date(2025, 3, 3), mood: 'neutral', emoji: '🙂', color: '#FFDF6B', note: 'Regular day' },
+    { id: '3', date: new Date(2025, 3, 2), mood: 'sad', emoji: '🙁', color: '#FDB777', note: 'Feeling a bit down' },
+    { id: '4', date: new Date(2025, 3, 1), mood: 'angry', emoji: '😠', color: '#F47C7C', note: 'Frustrated with work' },
+    { id: '5', date: new Date(2025, 2, 28), mood: 'happy', emoji: '😊', color: '#ADE792', note: 'Weekend was great' },
 ];
 
 export default function HistoryScreen() {
@@ -40,8 +40,10 @@ export default function HistoryScreen() {
     return (
         <ThemedView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>
-                <ThemedText style={styles.title}>Mood History</ThemedText>
-                
+                <View>
+                    <ThemedText style={styles.title}>Mood History</ThemedText>
+                </View>
+
                 <FlatList
                     data={moodHistory}
                     renderItem={renderMoodItem}
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 24,
-        marginTop: 40,
+        marginTop: 100,
     },
     historyList: {
         gap: 16,
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 16,
+        paddingTop: 5,
     },
     emoji: {
         fontSize: 24,

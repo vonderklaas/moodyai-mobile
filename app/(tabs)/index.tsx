@@ -7,9 +7,8 @@ export default function HomeScreen() {
     return (
         <ThemedView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>
-                <ThemedText style={styles.headerTitle}>Moody AI</ThemedText>
                 
-                <ThemedText style={styles.instructionText}>
+                <ThemedText style={styles.headerTitle}>
                     Tap the emoji that best describes your mood
                 </ThemedText>
                 
@@ -33,14 +32,14 @@ export default function HomeScreen() {
                 
                 <View style={styles.noteContainer}>
                     <TextInput
-                        placeholder="Optional note"
+                        placeholder="What do you think caused it?"
                         placeholderTextColor="#999"
                         style={styles.noteInput}
                     />
                 </View>
                 
                 <TouchableOpacity style={styles.logButton}>
-                    <ThemedText style={styles.logButtonText}>Log Mood</ThemedText>
+                    <ThemedText style={styles.logButtonText}>Track it</ThemedText>
                 </TouchableOpacity>
             </ScrollView>
         </ThemedView>
@@ -56,16 +55,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     headerTitle: {
-        fontSize: 20,
-        fontWeight: '500',
-        marginBottom: 50,
-        marginTop: 20,
-    },
-    instructionText: {
         fontSize: 26,
         fontWeight: '700',
         textAlign: 'center',
         marginBottom: 40,
+        marginTop: 60,
         lineHeight: 36,
     },
     emojiRow: {
@@ -82,7 +76,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     emoji: {
-        fontSize: 30,
+        fontSize: 28,
+        lineHeight: 38,
     },
     noteContainer: {
         width: '100%',
