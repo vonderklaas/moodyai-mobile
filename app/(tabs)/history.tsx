@@ -1,5 +1,6 @@
-import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, Platform } from 'react-native';
 import { format } from 'date-fns';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -24,6 +25,8 @@ const moodHistory: MoodEntry[] = [
 ];
 
 export default function HistoryScreen() {
+    const insets = useSafeAreaInsets();
+    
     // Render each mood entry
     const renderMoodItem = ({ item }: { item: MoodEntry }) => (
         <View style={styles.moodItem}>
@@ -39,9 +42,18 @@ export default function HistoryScreen() {
 
     return (
         <ThemedView style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContent}>
-                <View>
-                    <ThemedText style={styles.title}>Mood History</ThemedText>
+            {/* Add a spacer view at the top to prevent the fade effect */}
+            <View style={{
+                height: insets.top + (Platform.OS === 'ios' ? 15 : 10), 
+                backgroundColor: 'white'
+            }} />
+            
+            <ScrollView 
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.titleContainer}>
+                    <ThemedText style={styles.title}>History</ThemedText>
                 </View>
 
                 <FlatList
@@ -62,12 +74,15 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         padding: 24,
+        paddingTop: 10,
+    },
+    titleContainer: {
+        marginBottom: 50,
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 24,
-        marginTop: 100,
+        lineHeight: 34,
     },
     historyList: {
         gap: 16,

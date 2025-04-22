@@ -1,17 +1,31 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function InsightsScreen() {
+    const insets = useSafeAreaInsets();
+    
     return (
         <ThemedView style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContent}>
-                <ThemedText style={styles.title}>Mood Insights</ThemedText>
+            {/* Add a spacer view at the top to prevent the fade effect */}
+            <View style={{
+                height: insets.top + (Platform.OS === 'ios' ? 15 : 10), 
+                backgroundColor: 'white'
+            }} />
+            
+            <ScrollView 
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.titleContainer}>
+                    <ThemedText style={styles.title}>Insights</ThemedText>
+                </View>
                 
                 {/* Average Mood */}
                 <View style={styles.averageMoodContainer}>
-                    <ThemedText style={styles.averageMoodValue}>4,2</ThemedText>
+                    <ThemedText style={styles.averageMoodValue}>4.2</ThemedText>
                     <ThemedText style={styles.averageMoodLabel}>Average mood</ThemedText>
                 </View>
                 
@@ -47,19 +61,24 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         padding: 24,
+        paddingTop: 10,
+    },
+    titleContainer: {
+        marginBottom: 50,
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 24,
-        marginTop: 40,
+        lineHeight: 34,
     },
     averageMoodContainer: {
+        marginTop: 0,
         marginBottom: 32,
     },
     averageMoodValue: {
-        fontSize: 36,
+        fontSize: 42,
         fontWeight: 'bold',
+        lineHeight: 50,
     },
     averageMoodLabel: {
         fontSize: 18,

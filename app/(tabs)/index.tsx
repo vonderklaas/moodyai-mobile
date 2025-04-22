@@ -1,35 +1,46 @@
-import { StyleSheet, ScrollView, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, ScrollView, View, TouchableOpacity, TextInput, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+    const insets = useSafeAreaInsets();
+
     return (
         <ThemedView style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContent}>
-                
+            <View style={{
+                height: insets.top + (Platform.OS === 'ios' ? 15 : 10),
+                backgroundColor: 'white'
+            }} />
+
+            <ScrollView
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.titleContainer}>
+                    <ThemedText style={styles.title}>Daily Tracker</ThemedText>
+                </View>
+
                 <ThemedText style={styles.headerTitle}>
-                    Tap the emoji that best describes your mood
+                    What is your mood now?
                 </ThemedText>
-                
+
                 <View style={styles.emojiRow}>
-                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#F47C7C' }]}>
-                        <ThemedText style={styles.emoji}>😠</ThemedText>
-                    </TouchableOpacity> 
-                    
-                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FDB777' }]}>
-                        <ThemedText style={styles.emoji}>🙁</ThemedText>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FFDF6B' }]}>
-                        <ThemedText style={styles.emoji}>🙂</ThemedText>
-                    </TouchableOpacity>
-                    
                     <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#ADE792' }]}>
                         <ThemedText style={styles.emoji}>😊</ThemedText>
                     </TouchableOpacity>
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FFDF6B' }]}>
+                        <ThemedText style={styles.emoji}>🙂</ThemedText>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#FDB777' }]}>
+                        <ThemedText style={styles.emoji}>🙁</ThemedText>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.emojiCircle, { backgroundColor: '#F47C7C' }]}>
+                        <ThemedText style={styles.emoji}>😠</ThemedText>
+                    </TouchableOpacity>
                 </View>
-                
+
                 <View style={styles.noteContainer}>
                     <TextInput
                         placeholder="What do you think caused it?"
@@ -37,7 +48,7 @@ export default function HomeScreen() {
                         style={styles.noteInput}
                     />
                 </View>
-                
+
                 <TouchableOpacity style={styles.logButton}>
                     <ThemedText style={styles.logButtonText}>Track it</ThemedText>
                 </TouchableOpacity>
@@ -51,16 +62,26 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     scrollContent: {
-        padding: 32,
+        padding: 24,
         alignItems: 'center',
+        paddingTop: 10,
+    },
+    titleContainer: {
+        marginBottom: 50,
+        alignSelf: 'flex-start',
+        width: '100%',
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        lineHeight: 34,
     },
     headerTitle: {
-        fontSize: 26,
-        fontWeight: '700',
+        fontSize: 22,
+        fontWeight: '600',
         textAlign: 'center',
-        marginBottom: 40,
-        marginTop: 60,
-        lineHeight: 36,
+        marginBottom: 30,
+        lineHeight: 30,
     },
     emojiRow: {
         flexDirection: 'row',
